@@ -6,7 +6,7 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:01 by gbrunet           #+#    #+#             */
-/*   Updated: 2024/03/26 16:02:38 by gbrunet          ###   ########.fr       */
+/*   Updated: 2024/03/26 22:27:52 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	main() {
 
 	std::cout << std::endl;
 	help_msg("Testing ShrubberyCreationForm constructors");
-	AForm	*s1 = new ShrubberyCreationForm();
+	AForm	*s1 = new ShrubberyCreationForm("bathroom");
 	std::cout << *s1 << std::endl;
 	ShrubberyCreationForm	s2("home");
 	std::cout << s2 << std::endl;
@@ -207,7 +207,7 @@ int	main() {
 
 	std::cout << std::endl;
 	help_msg("Testing RobotomyRequestForm constructors");
-	AForm	*r1 = new RobotomyRequestForm();
+	AForm	*r1 = new RobotomyRequestForm("bathroom");
 	std::cout << *r1 << std::endl;
 	RobotomyRequestForm	r2("home");
 	std::cout << r2 << std::endl;
@@ -329,7 +329,7 @@ int	main() {
 
 	std::cout << std::endl;
 	help_msg("Testing PresidentialPardonForm constructors");
-	AForm	*p1 = new PresidentialPardonForm();
+	AForm	*p1 = new PresidentialPardonForm("bathroom");
 	std::cout << *p1 << std::endl;
 	PresidentialPardonForm	p2("home");
 	std::cout << p2 << std::endl;

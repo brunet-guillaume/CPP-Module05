@@ -6,7 +6,7 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:42:22 by gbrunet           #+#    #+#             */
-/*   Updated: 2024/03/26 17:14:46 by gbrunet          ###   ########.fr       */
+/*   Updated: 2024/03/26 22:28:57 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,14 +95,14 @@ std::ostream	&operator<<(std::ostream &o, const Form &form) {
 	return (o);
 }
 
-char	*Form::GradeTooHighException::what() const throw() {
+const char	*Form::GradeTooHighException::what() const throw() {
 	return ((char *)"Invalid grade: grade too high.");
 }
 
-char	*Form::GradeTooLowException::what() const throw() {
+const char	*Form::GradeTooLowException::what() const throw() {
 	return ((char *)"Invalid grade: grade too low.");
 }
 
-char	*Form::AlreadySignedException::what() const throw() {
+const char	*Form::AlreadySignedException::what() const throw() {
 	return ((char *)"Unable to sign form: form is already signed.");
 }

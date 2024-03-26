@@ -6,7 +6,7 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:39:44 by gbrunet           #+#    #+#             */
-/*   Updated: 2024/03/26 13:50:12 by gbrunet          ###   ########.fr       */
+/*   Updated: 2024/03/26 22:24:52 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,19 @@ class	AForm {
 
 		class GradeTooHighException: public std::exception {
 			public:
-				char* what() const throw();
+				const char* what() const throw();
 		};
 		class GradeTooLowException: public std::exception {
 			public:
-				char* what() const throw();
+				const char* what() const throw();
 		};
 		class NotSignedException: public std::exception {
 			public:
-				char* what() const throw();
+				const char* what() const throw();
 		};
 		class AlreadySignedException: public std::exception {
 			public:
-				char* what() const throw();
+				const char* what() const throw();
 		};
 };
 

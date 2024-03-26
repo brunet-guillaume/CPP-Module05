@@ -6,7 +6,7 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:45:16 by gbrunet           #+#    #+#             */
-/*   Updated: 2024/02/23 18:47:51 by gbrunet          ###   ########.fr       */
+/*   Updated: 2024/03/26 22:25:26 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	Bureaucrat::decrementGrade() {
 		throw Bureaucrat::GradeTooLowException();
 }
 
-void	Bureaucrat::signForm(Form &form) {
+void	Bureaucrat::signForm(AForm &form) {
 	if (this->_grade > form.getRequiredSign()) {
 		std::cout << this->_name << " couldn't sign " << form.getName() << " because it's grade ";
 		std::cout << "is too low" << std::endl;
@@ -78,15 +78,28 @@ void	Bureaucrat::signForm(Form &form) {
 	}
 }
 
+void	Bureaucrat::executeForm(const AForm &form) {
+	if (this->_grade > form.getRequiredExec()) {
+		std::cout << this->_name << " couldn't execute " << form.getName() << " because it's grade ";
+		std::cout << "is too low" << std::endl;
+	} else if (!form.getSigned()) {
+		std::cout << this->_name << " couldn't execute " << form.getName() << " because it's not ";
+		std::cout << "signed" << std::endl;
+	} else {
+		form.execute(*this);
+		std::cout << this->_name << " executed " << form.getName() << std::endl;
+	}
+}
+
 std::ostream	&operator<<(std::ostream &o, const Bureaucrat &bureaucrat) {
 	o << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade();
 	return (o);
 }
 
-char	*Bureaucrat::GradeTooHighException::what() const throw() {
+const char	*Bureaucrat::GradeTooHighException::what() const throw() {
 	return ((char *)"Invalid grade: grade too high. Grade must be between 1 and 150");
 }
 
-char	*Bureaucrat::GradeTooLowException::what() const throw() {
+const char	*Bureaucrat::GradeTooLowException::what() const throw() {
 	return ((char *)"Invalid grade: grade too low. Grade must be between 1 and 150");
 }

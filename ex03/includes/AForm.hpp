@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.hpp                                           :+:      :+:    :+:   */
+/*   AForm.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:39:44 by gbrunet           #+#    #+#             */
-/*   Updated: 2024/03/26 17:13:05 by gbrunet          ###   ########.fr       */
+/*   Updated: 2024/03/26 22:31:35 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,40 +19,47 @@
 
 class	Bureaucrat;
 
-class	Form {
+class	AForm {
 	private:
 		const std::string	_name;
 		bool				_signed;
 		const int			_required_sign;
 		const int			_required_exec;
 	public:
-		Form();
-		Form(const std::string name, const int required_sign, const int required_exec);
-		Form(const Form &cpy);
-		~Form();
+		AForm();
+		AForm(const std::string name, const int required_sign, const int required_exec);
+		AForm(const AForm &cpy);
+		virtual	~AForm();
 
-		Form &operator=(const Form &rhs);
+		AForm &operator=(const AForm &rhs);
 		
-		std::string	getName() const;
-		bool	getSigned() const;
-		int	getRequiredSign() const;
-		int	getRequiredExec() const;
-		void	beSigned(const Bureaucrat &bureaucrat);
+		std::string				getName() const;
+		bool					getSigned() const;
+		int						getRequiredSign() const;
+		int						getRequiredExec() const;
+		void					beSigned(const Bureaucrat &bureaucrat);
+		void					execute(const Bureaucrat &executor) const;
+		virtual std::ostream	&print(std::ostream &o) const;
+		virtual void			doExecute() const = 0;
 
 		class GradeTooHighException: public std::exception {
 			public:
-				char* what() const throw();
+				const char* what() const throw();
 		};
 		class GradeTooLowException: public std::exception {
 			public:
-				char* what() const throw();
+				const char* what() const throw();
+		};
+		class NotSignedException: public std::exception {
+			public:
+				const char* what() const throw();
 		};
 		class AlreadySignedException: public std::exception {
 			public:
-				char* what() const throw();
+				const char* what() const throw();
 		};
 };
 
-std::ostream &operator<<(std::ostream &o, const Form &form);
+std::ostream &operator<<(std::ostream &o, const AForm &form);
 
 #endif

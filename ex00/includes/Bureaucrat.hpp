@@ -6,7 +6,7 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:36:13 by gbrunet           #+#    #+#             */
-/*   Updated: 2024/03/26 14:14:08 by gbrunet          ###   ########.fr       */
+/*   Updated: 2024/03/26 22:30:04 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,9 @@
 # define BUREAUCRAT_HPP
 
 # include <string>
-# include "AForm.hpp"
 # include "style.h"
 
-class	AForm;
-
-class	Bureaucrat {
+class Bureaucrat {
 	private:
 		const std::string	_name;
 		int					_grade;
@@ -35,16 +32,14 @@ class	Bureaucrat {
 		int			getGrade() const;
 		void		incrementGrade();
 		void		decrementGrade();
-		void		signForm(AForm &form);
-		void		executeForm(const AForm &form);
 
 		class GradeTooHighException: public std::exception {
 			public:
-				char* what() const throw();
+				const char* what() const throw();
 		};
 		class GradeTooLowException: public std::exception {
 			public:
-				char* what() const throw();
+				const char* what() const throw();
 		};
 };
 

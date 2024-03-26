@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PresidentialPardonForm.hpp                         :+:      :+:    :+:   */
+/*   RobotomyRequestForm.hpp                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/26 15:35:47 by gbrunet           #+#    #+#             */
-/*   Updated: 2024/03/26 15:37:37 by gbrunet          ###   ########.fr       */
+/*   Created: 2024/03/26 14:54:02 by gbrunet           #+#    #+#             */
+/*   Updated: 2024/03/26 22:26:43 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRESIDENTIALPARDONFORM_HPP
-# define PRESIDENTIALPARDONFORM_HPP
-
+#ifndef ROBOTOMYREQUESTFORM_HPP
+# define ROBOTOMYREQUESTFORM_HPP
 # include "AForm.hpp"
 
-class PresidentialPardonForm : public AForm {
+class RobotomyRequestForm : public AForm {
 	private:
 		const std::string _target;
+		RobotomyRequestForm();
 
 	public:
-		PresidentialPardonForm();
-		PresidentialPardonForm(const std::string target);
-		PresidentialPardonForm(const PresidentialPardonForm &cpy);
+		RobotomyRequestForm(const std::string target);
+		RobotomyRequestForm(const RobotomyRequestForm &cpy);
 
-		~PresidentialPardonForm();
+		~RobotomyRequestForm();
 
-		PresidentialPardonForm	&operator=(const PresidentialPardonForm &rhs);
+		RobotomyRequestForm	&operator=(const RobotomyRequestForm &rhs);
 
 		void			doExecute() const;
 		std::string		getTarget() const;

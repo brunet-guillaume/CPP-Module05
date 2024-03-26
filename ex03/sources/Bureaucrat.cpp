@@ -6,7 +6,7 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:45:16 by gbrunet           #+#    #+#             */
-/*   Updated: 2024/03/26 14:16:26 by gbrunet          ###   ########.fr       */
+/*   Updated: 2024/03/26 22:30:36 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,10 @@ std::ostream	&operator<<(std::ostream &o, const Bureaucrat &bureaucrat) {
 	return (o);
 }
 
-char	*Bureaucrat::GradeTooHighException::what() const throw() {
+const char	*Bureaucrat::GradeTooHighException::what() const throw() {
 	return ((char *)"Invalid grade: grade too high. Grade must be between 1 and 150");
 }
 
-char	*Bureaucrat::GradeTooLowException::what() const throw() {
+const char	*Bureaucrat::GradeTooLowException::what() const throw() {
 	return ((char *)"Invalid grade: grade too low. Grade must be between 1 and 150");
 }

@@ -6,37 +6,71 @@
 #    By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 14:06:15 by gbrunet           #+#    #+#              #
-#    Updated: 2024/03/26 16:19:02 by gbrunet          ###   ########.fr        #
+#    Updated: 2024/03/26 22:55:36 by gbrunet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+_BLACK = \033[0;30m
+_RED = \033[0;31m
+_GREEN = \033[0;32m
+_BLUE = \033[0;34m
+_YELLOW = \033[0;33m
+_PURPLE = \033[0;35m
+_CYAN = \033[0;36m
+_WHITE = \033[0;37m
+
+_BOLD = \e[1m
+_THIN = \e[2m
+
+_END = \033[0m
 
 NAME = ex03
 
 CC = c++
 
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+INCLUDES = includes
 
-SRC = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp \
-	  RobotomyRequestForm.cpp PresdientialPardonForm.cpp Intern.cpp
+CFLAGS = -Wall -Wextra -Werror -std=c++98 -I $(INCLUDES)
 
-OBJ = main.o Bureaucrat.o AForm.o ShrubberyCreationForm.o \
-	  RobotomyRequestForm.o PresidentialPardonForm.o Intern.o
+SRC_DIR = sources/
+
+OBJ_DIR = objects/
+
+SRC = main Bureaucrat AForm ShrubberyCreationForm \
+	  RobotomyRequestForm PresidentialPardonForm Intern
+
+SRC_FILES = $(addprefix $(SRC_DIR), $(addsuffix .cpp, $(SRC)))
+
+OBJ_FILES = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC)))
+
+COMPTEUR = 0
+
+.PHONY : all clean fclean re
 
 all : $(NAME)
 
-%.o : %.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
+$(OBJ_DIR)%.o : $(SRC_DIR)%.cpp
+	$(eval COMPTEUR=$(shell echo $$(($(COMPTEUR)+1))))
+	@mkdir -p $(@D)
+	@printf "$(_CYAN)Binary $(COMPTEUR): $@$(_END)\n"
+	$(CC) -c $(CFLAGS) $< -o $@
 
-$(NAME) : $(OBJ)
-	$(CC) $(OBJ) -o $(NAME)
+$(NAME) : $(OBJ_FILES)
+	$(CC) $(OBJ_FILES) -o $(NAME)
+	@echo "$(_GREEN)$(NAME) created.$(_END)"
 
 clean :
-	$(RM) $(OBJ)
+	@echo "$(_YELLOW)$(NAME): Clean...$(_END)"
+	$(RM) -rf $(OBJ_DIR)
+	@echo "$(_GREEN)$(NAME): Binaries deleted.$(_END)"
 
 fclean :
-	make clean
+	@echo "$(_YELLOW)$(NAME): Full clean...$(_END)"
+	$(RM) -rf $(OBJ_DIR)
+	@echo "$(_GREEN)$(NAME): Binaries deleted.$(_END)"
 	$(RM) $(NAME)
+	@echo "$(_GREEN)$(NAME) deleted.$(_END)"
 
 re :
-	make fclean
-	make all
+	@make fclean --no-print-directory
+	@make all --no-print-directory
