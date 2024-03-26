@@ -6,7 +6,7 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:01 by gbrunet           #+#    #+#             */
-/*   Updated: 2024/03/26 12:04:42 by gbrunet          ###   ########.fr       */
+/*   Updated: 2024/03/26 14:22:06 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ int	main() {
 	std::cout << s2 << std::endl;
 	ShrubberyCreationForm	s3("garden");
 	std::cout << s3 << std::endl;
+	ShrubberyCreationForm	s5("kitchen");
+	std::cout << s5 << std::endl;
 
 	std::cout << std::endl;
 	try {
@@ -105,6 +107,16 @@ int	main() {
 	std::cout << std::endl;
 	try {
 		help_msg("Signing ShrubberyCreationForm with target home with the required grade");
+		s2.beSigned(b2);
+		std::cout << s2 << std::endl;
+	}
+	catch (std::exception &e) {
+		std::cerr << RED << e.what() << END_STYLE << std::endl;
+	}
+	
+	std::cout << std::endl;
+	try {
+		help_msg("Trying to sign already signed ShrubberyCreationForm with target home with the required grade");
 		s2.beSigned(b2);
 		std::cout << s2 << std::endl;
 	}
@@ -137,17 +149,11 @@ int	main() {
 	std::cout << *s1 << std::endl;
 	ShrubberyCreationForm	s4(s2);
 	std::cout << s4 << std::endl;
-/*	Form	*f1 = new Form();
-	std::cout << *f1 << std::endl;
-	Form	f2("Contract 1", 5, 55);
-	std::cout << f2 << std::endl;
-	Form	f3("Contract 2", 70, 80);
-	std::cout << f3 << std::endl;
 
 	std::cout << std::endl;
 	try {
-		help_msg("Trying to sign form Contract 1 without the required grade");
-		f2.beSigned(b3);
+		help_msg("Trying to execute ShrubberyCreationForm with target garden without the required grade");
+		s3.execute(b3);
 	}
 	catch (std::exception &e) {
 		std::cerr << RED << e.what() << END_STYLE << std::endl;
@@ -155,8 +161,8 @@ int	main() {
 	
 	std::cout << std::endl;
 	try {
-		help_msg("Signing form Contract 1 with the required grade");
-		f2.beSigned(b2);
+		help_msg("Trying to execute ShrubberyCreationForm with target kitchen which is not signed");
+		s5.execute(*b1);
 	}
 	catch (std::exception &e) {
 		std::cerr << RED << e.what() << END_STYLE << std::endl;
@@ -164,8 +170,8 @@ int	main() {
 
 	std::cout << std::endl;
 	try {
-		help_msg("Trying to sign form Contract 2 without the required grade");
-		b3.signForm(f3);
+		help_msg("Executing ShrubberyCreationForm with target garden with the required grade");
+		s3.execute(*b1);
 	}
 	catch (std::exception &e) {
 		std::cerr << RED << e.what() << END_STYLE << std::endl;
@@ -173,25 +179,34 @@ int	main() {
 	
 	std::cout << std::endl;
 	try {
-		help_msg("Signing form Contract 2 with the required grade");
-		b2.signForm(f3);
+		help_msg("Bureaucrat with grade too low tries to execute ShrubberyCreationForm with target home");
+		b3.executeForm(s2);
+	}
+	catch (std::exception &e) {
+		std::cerr << RED << e.what() << END_STYLE << std::endl;
+	}
+	
+	std::cout << std::endl;
+	try {
+		help_msg("Bureaucrat with grade 0k tries to execute ShrubberyCreationForm with target kitchen which is not signed");
+		b2.executeForm(s5);
+	}
+	catch (std::exception &e) {
+		std::cerr << RED << e.what() << END_STYLE << std::endl;
+	}
+	
+	std::cout << std::endl;
+	try {
+		help_msg("Bureaucrat with grade 0k execute ShrubberyCreationForm with target home which is signed");
+		b2.executeForm(s2);
 	}
 	catch (std::exception &e) {
 		std::cerr << RED << e.what() << END_STYLE << std::endl;
 	}
 
-	std::cout << std::endl;
-	help_msg("Testing Form copy constructors");
-	*f1 = f2;
-	warning_msg("Copied Form can't change is _name, _required_sign and _required_exec (const)");
-	std::cout << *f1 << std::endl;
-	Form	f4(f2);
-	std::cout << f4 << std::endl;
-
-*/
 	std::cout << std::endl;
 	help_msg("Destructors");
 	delete (b1);
-//	delete (f1);
+	delete (s1);
 	return (0);
 }

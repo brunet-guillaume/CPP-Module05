@@ -6,7 +6,7 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:45:16 by gbrunet           #+#    #+#             */
-/*   Updated: 2024/03/26 10:44:31 by gbrunet          ###   ########.fr       */
+/*   Updated: 2024/03/26 14:16:26 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,19 @@ void	Bureaucrat::signForm(AForm &form) {
 	} else {
 		form.beSigned(*this);
 		std::cout << this->_name << " signed " << form.getName() << std::endl;
+	}
+}
+
+void	Bureaucrat::executeForm(const AForm &form) {
+	if (this->_grade > form.getRequiredExec()) {
+		std::cout << this->_name << " couldn't execute " << form.getName() << " because it's grade ";
+		std::cout << "is too low" << std::endl;
+	} else if (!form.getSigned()) {
+		std::cout << this->_name << " couldn't execute " << form.getName() << " because it's not ";
+		std::cout << "signed" << std::endl;
+	} else {
+		form.execute(*this);
+		std::cout << this->_name << " executed " << form.getName() << std::endl;
 	}
 }
 

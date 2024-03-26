@@ -6,12 +6,13 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 10:04:14 by gbrunet           #+#    #+#             */
-/*   Updated: 2024/03/26 12:07:59 by gbrunet          ###   ########.fr       */
+/*   Updated: 2024/03/26 14:06:06 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ShrubberyCreationForm.hpp"
 #include <iostream>
+#include <fstream>
 
 ShrubberyCreationForm::ShrubberyCreationForm():
 		AForm("ShrubberyCreationForm", 145, 137), _target("default_target"){
@@ -49,9 +50,25 @@ std::ostream	&ShrubberyCreationForm::print(std::ostream &o) const {
 	return (o);	
 }
 
-void	ShrubberyCreationForm::execute(const Bureaucrat &executor) const {
-	(void) executor;
-	std::cout << "ok" << std::endl;
+void	ShrubberyCreationForm::doExecute() const {
+	std::ofstream	outfile((this->getTarget() + "_shrubbery").c_str(), std::ofstream::out);
+
+	if (!outfile.is_open())
+	{
+		std::cerr << "Unable to create " << this->getTarget() << "_shrubbery file" << std::endl;
+		return ;
+	}
+	outfile << "               ,@@@@@@@," << std::endl;
+	outfile << "       ,,,.   ,@@@@@@/@@,  .oo8888o." << std::endl;
+	outfile << "    ,&%%&%&&%,@@@@@/@@@@@@,8888\\88/8o" << std::endl;
+	outfile << "   ,%&\\%&&%&&%,@@@\\@@@/@@@88\\88888/88'" << std::endl;
+	outfile << "   %&&%&%&/%&&%@@\\@@/ /@@@88888\\88888'" << std::endl;
+	outfile << "   %&&%/ %&%%&&@@\\ V /@@' `88\\8 `/88'" << std::endl;
+	outfile << "   `&%\\ ` /%&'    |.|        \\ '|8'" << std::endl;
+	outfile << "       |o|        | |         | |" << std::endl;
+	outfile << "       |.|        | |         | |" << std::endl;
+	outfile << "/_-/\\\\/ ._\\//_/__/  ,\\_//__\\\\/.  \\_//__/_" << std::endl;
+	outfile.close();
 }
 
 std::string	ShrubberyCreationForm::getTarget() const {

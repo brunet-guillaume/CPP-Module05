@@ -6,7 +6,7 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 09:59:29 by gbrunet           #+#    #+#             */
-/*   Updated: 2024/03/26 11:47:41 by gbrunet          ###   ########.fr       */
+/*   Updated: 2024/03/26 13:35:57 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ class ShrubberyCreationForm : public AForm {
 
 		ShrubberyCreationForm	&operator=(const ShrubberyCreationForm &rhs);
 
-		void			execute(const Bureaucrat &executor) const;
+		void			doExecute() const;
 		std::string		getTarget() const;
 		std::ostream	&print(std::ostream &o) const;
 };

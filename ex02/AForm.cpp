@@ -6,7 +6,7 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:42:22 by gbrunet           #+#    #+#             */
-/*   Updated: 2024/03/26 11:40:58 by gbrunet          ###   ########.fr       */
+/*   Updated: 2024/03/26 13:50:39 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,17 @@ int	AForm::getRequiredExec() const {
 void	AForm::beSigned(const Bureaucrat &bureaucrat) {
 	if (bureaucrat.getGrade() > this->_required_sign)
 		throw AForm::GradeTooLowException();
+	if (this->getSigned())
+		throw AForm::AlreadySignedException();
 	this->_signed = true;
+}
+
+void	AForm::execute(const Bureaucrat &executor) const {
+	if (executor.getGrade() > this->_required_exec)
+		throw AForm::GradeTooLowException();
+	if (!this->getSigned())
+		throw AForm::NotSignedException();
+	this->doExecute();
 }
 
 std::ostream	&AForm::print(std::ostream &o) const {
@@ -103,4 +113,12 @@ char	*AForm::GradeTooHighException::what() const throw() {
 
 char	*AForm::GradeTooLowException::what() const throw() {
 	return ((char *)"Invalid grade: grade too low.");
+}
+
+char	*AForm::NotSignedException::what() const throw() {
+	return ((char *)"Unable to execute: form not signed.");
+}
+
+char	*AForm::AlreadySignedException::what() const throw() {
+	return ((char *)"Unable to sign form: form is already signed.");
 }
