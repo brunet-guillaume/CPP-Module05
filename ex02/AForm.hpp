@@ -6,7 +6,7 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:39:44 by gbrunet           #+#    #+#             */
-/*   Updated: 2024/03/15 18:38:50 by gbrunet          ###   ########.fr       */
+/*   Updated: 2024/03/26 11:39:59 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,27 @@
 
 class	Bureaucrat;
 
-abstract class	AForm {
+class	AForm {
 	private:
 		const std::string	_name;
 		bool				_signed;
 		const int			_required_sign;
 		const int			_required_exec;
 	public:
-		Form();
-		Form(const std::string name, const int required_sign, const int required_exec);
-		Form(const Form &cpy);
-		~Form();
+		AForm();
+		AForm(const std::string name, const int required_sign, const int required_exec);
+		AForm(const AForm &cpy);
+		~AForm();
 
-		Form &operator=(const Form &rhs);
+		AForm &operator=(const AForm &rhs);
 		
-		std::string	getName() const;
-		bool	getSigned() const;
-		int	getRequiredSign() const;
-		int	getRequiredExec() const;
-		void	beSigned(const Bureaucrat &bureaucrat);
+		std::string				getName() const;
+		bool					getSigned() const;
+		int						getRequiredSign() const;
+		int						getRequiredExec() const;
+		void					beSigned(const Bureaucrat &bureaucrat);
+		virtual void			execute(const Bureaucrat &executor) const = 0;
+		virtual std::ostream	&print(std::ostream &o) const;
 
 		class GradeTooHighException: public std::exception {
 			public:
@@ -49,6 +51,6 @@ abstract class	AForm {
 		};
 };
 
-std::ostream &operator<<(std::ostream &o, const Form &form);
+std::ostream &operator<<(std::ostream &o, const AForm &form);
 
 #endif
