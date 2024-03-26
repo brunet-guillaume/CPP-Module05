@@ -6,7 +6,7 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:39:44 by gbrunet           #+#    #+#             */
-/*   Updated: 2024/02/23 18:49:26 by gbrunet          ###   ########.fr       */
+/*   Updated: 2024/03/26 17:13:05 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,10 @@ class	Form {
 				char* what() const throw();
 		};
 		class GradeTooLowException: public std::exception {
+			public:
+				char* what() const throw();
+		};
+		class AlreadySignedException: public std::exception {
 			public:
 				char* what() const throw();
 		};
