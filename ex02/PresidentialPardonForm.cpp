@@ -6,7 +6,7 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:29:48 by gbrunet           #+#    #+#             */
-/*   Updated: 2024/03/26 15:35:14 by gbrunet          ###   ########.fr       */
+/*   Updated: 2024/03/26 16:03:52 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 #include <iostream>
 
 PresidentialPardonForm::PresidentialPardonForm():
-		AForm("PresidentialPardonForm", 72, 45), _target("default_target"){
+		AForm("PresidentialPardonForm", 25, 5), _target("default_target"){
 	std::cout << CYAN << "PresidentialPardonForm with default_target created" << END_STYLE << std::endl;	
 }
 
 PresidentialPardonForm::PresidentialPardonForm(const std::string target): 
-		AForm("PresidentialPardonForm", 72, 45), _target(target) {
+		AForm("PresidentialPardonForm", 25, 5), _target(target) {
 	std::cout << CYAN << "PresidentialPardonForm with target " << target << " created" << END_STYLE << std::endl;
 }
 

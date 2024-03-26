@@ -6,7 +6,7 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:01 by gbrunet           #+#    #+#             */
-/*   Updated: 2024/03/26 15:45:01 by gbrunet          ###   ########.fr       */
+/*   Updated: 2024/03/26 16:02:38 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,17 +205,6 @@ int	main() {
 		std::cerr << RED << e.what() << END_STYLE << std::endl;
 	}
 
-
-
-
-
-
-
-
-
-
-
-
 	std::cout << std::endl;
 	help_msg("Testing RobotomyRequestForm constructors");
 	AForm	*r1 = new RobotomyRequestForm();
@@ -338,15 +327,6 @@ int	main() {
 		std::cerr << RED << e.what() << END_STYLE << std::endl;
 	}
 
-
-
-
-
-
-
-
-
-
 	std::cout << std::endl;
 	help_msg("Testing PresidentialPardonForm constructors");
 	AForm	*p1 = new PresidentialPardonForm();
@@ -465,17 +445,6 @@ int	main() {
 	catch (std::exception &e) {
 		std::cerr << RED << e.what() << END_STYLE << std::endl;
 	}
-
-
-
-
-
-
-
-
-
-
-
 
 	std::cout << std::endl;
 	help_msg("Destructors");
