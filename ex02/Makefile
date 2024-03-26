@@ -6,7 +6,7 @@
 #    By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 14:06:15 by gbrunet           #+#    #+#              #
-#    Updated: 2024/03/26 10:57:46 by gbrunet          ###   ########.fr        #
+#    Updated: 2024/03/26 15:38:14 by gbrunet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,11 @@ CC = c++
 
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRC = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp
+SRC = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp \
+	  RobotomyRequestForm.cpp PresdientialPardonForm.cpp
 
-OBJ = main.o Bureaucrat.o AForm.o ShrubberyCreationForm.o
+OBJ = main.o Bureaucrat.o AForm.o ShrubberyCreationForm.o \
+	  RobotomyRequestForm.o PresidentialPardonForm.o
 
 all : $(NAME)
 

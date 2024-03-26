@@ -6,13 +6,15 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:20:01 by gbrunet           #+#    #+#             */
-/*   Updated: 2024/03/26 14:22:06 by gbrunet          ###   ########.fr       */
+/*   Updated: 2024/03/26 15:45:01 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
 #include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 #include <iostream>
 
 void	help_msg(std::string msg) {
@@ -118,7 +120,6 @@ int	main() {
 	try {
 		help_msg("Trying to sign already signed ShrubberyCreationForm with target home with the required grade");
 		s2.beSigned(b2);
-		std::cout << s2 << std::endl;
 	}
 	catch (std::exception &e) {
 		std::cerr << RED << e.what() << END_STYLE << std::endl;
@@ -204,9 +205,283 @@ int	main() {
 		std::cerr << RED << e.what() << END_STYLE << std::endl;
 	}
 
+
+
+
+
+
+
+
+
+
+
+
+	std::cout << std::endl;
+	help_msg("Testing RobotomyRequestForm constructors");
+	AForm	*r1 = new RobotomyRequestForm();
+	std::cout << *r1 << std::endl;
+	RobotomyRequestForm	r2("home");
+	std::cout << r2 << std::endl;
+	RobotomyRequestForm	r3("garden");
+	std::cout << r3 << std::endl;
+	RobotomyRequestForm	r5("kitchen");
+	std::cout << r5 << std::endl;
+
+	std::cout << std::endl;
+	try {
+		help_msg("Trying to sign RobotomyRequestForn with target home without the required grade");
+		r2.beSigned(b3);
+	}
+	catch (std::exception &e) {
+		std::cerr << RED << e.what() << END_STYLE << std::endl;
+	}
+	
+	std::cout << std::endl;
+	try {
+		help_msg("Signing RobotomyRequestForm with target home with the required grade");
+		r2.beSigned(b2);
+		std::cout << r2 << std::endl;
+	}
+	catch (std::exception &e) {
+		std::cerr << RED << e.what() << END_STYLE << std::endl;
+	}
+	
+	std::cout << std::endl;
+	try {
+		help_msg("Trying to sign already signed RobotomyRequestForm with target home with the required grade");
+		r2.beSigned(b2);
+	}
+	catch (std::exception &e) {
+		std::cerr << RED << e.what() << END_STYLE << std::endl;
+	}
+
+	std::cout << std::endl;
+	try {
+		help_msg("Trying to sign RobotomyRequestForm with target garden without the required grade");
+		b3.signForm(r3);
+	}
+	catch (std::exception &e) {
+		std::cerr << RED << e.what() << END_STYLE << std::endl;
+	}
+	
+	std::cout << std::endl;
+	try {
+		help_msg("Signing RobotomyRequestForm with target garden with the required grade");
+		b2.signForm(r3);
+	}
+	catch (std::exception &e) {
+		std::cerr << RED << e.what() << END_STYLE << std::endl;
+	}
+
+	std::cout << std::endl;
+	help_msg("Testing RobotomyRequestForm copy constructors");
+	*r1 = r2;
+	warning_msg("Copied RobotomyRequestForm  can't change is _target, because it's a const std::string");
+	std::cout << *r1 << std::endl;
+	RobotomyRequestForm	r4(r2);
+	std::cout << r4 << std::endl;
+
+	std::cout << std::endl;
+	try {
+		help_msg("Trying to execute RobotomyRequestForm with target garden without the required grade");
+		r3.execute(b3);
+	}
+	catch (std::exception &e) {
+		std::cerr << RED << e.what() << END_STYLE << std::endl;
+	}
+	
+	std::cout << std::endl;
+	try {
+		help_msg("Trying to execute RobotomyRequestForm with target kitchen which is not signed");
+		r5.execute(*b1);
+	}
+	catch (std::exception &e) {
+		std::cerr << RED << e.what() << END_STYLE << std::endl;
+	}
+
+	std::cout << std::endl;
+	try {
+		help_msg("Executing RobotomyRequestForm with target garden with the required grade (x10)");
+		for (int i = 0; i < 10; i++) {
+			r3.execute(*b1);
+			std::cout << std::endl;
+		}
+	}
+	catch (std::exception &e) {
+		std::cerr << RED << e.what() << END_STYLE << std::endl;
+	}
+	
+	std::cout << std::endl;
+	try {
+		help_msg("Bureaucrat with grade too low tries to execute RobotomyRequestForm with target home");
+		b3.executeForm(r2);
+	}
+	catch (std::exception &e) {
+		std::cerr << RED << e.what() << END_STYLE << std::endl;
+	}
+	
+	std::cout << std::endl;
+	try {
+		help_msg("Bureaucrat with grade 0k tries to execute RobotomyRequestForm with target kitchen which is not signed");
+		b2.executeForm(r5);
+	}
+	catch (std::exception &e) {
+		std::cerr << RED << e.what() << END_STYLE << std::endl;
+	}
+	
+	std::cout << std::endl;
+	try {
+		help_msg("Bureaucrat with grade 0k execute RobotomyRequestForm with target home which is signed");
+		b2.executeForm(r2);
+	}
+	catch (std::exception &e) {
+		std::cerr << RED << e.what() << END_STYLE << std::endl;
+	}
+
+
+
+
+
+
+
+
+
+
+	std::cout << std::endl;
+	help_msg("Testing PresidentialPardonForm constructors");
+	AForm	*p1 = new PresidentialPardonForm();
+	std::cout << *p1 << std::endl;
+	PresidentialPardonForm	p2("home");
+	std::cout << p2 << std::endl;
+	PresidentialPardonForm	p3("garden");
+	std::cout << p3 << std::endl;
+	PresidentialPardonForm	p5("kitchen");
+	std::cout << p5 << std::endl;
+
+	std::cout << std::endl;
+	try {
+		help_msg("Trying to sign PresidentialPardonForn with target home without the required grade");
+		p2.beSigned(b3);
+	}
+	catch (std::exception &e) {
+		std::cerr << RED << e.what() << END_STYLE << std::endl;
+	}
+	
+	std::cout << std::endl;
+	try {
+		help_msg("Signing PresidentialPardonForm with target home with the required grade");
+		p2.beSigned(b2);
+		std::cout << p2 << std::endl;
+	}
+	catch (std::exception &e) {
+		std::cerr << RED << e.what() << END_STYLE << std::endl;
+	}
+	
+	std::cout << std::endl;
+	try {
+		help_msg("Trying to sign already signed PresidentialPardonForm with target home with the required grade");
+		p2.beSigned(b2);
+	}
+	catch (std::exception &e) {
+		std::cerr << RED << e.what() << END_STYLE << std::endl;
+	}
+
+	std::cout << std::endl;
+	try {
+		help_msg("Trying to sign PresidentialPardonForm with target garden without the required grade");
+		b3.signForm(p3);
+	}
+	catch (std::exception &e) {
+		std::cerr << RED << e.what() << END_STYLE << std::endl;
+	}
+	
+	std::cout << std::endl;
+	try {
+		help_msg("Signing PresidentialPardonForm with target garden with the required grade");
+		b2.signForm(p3);
+	}
+	catch (std::exception &e) {
+		std::cerr << RED << e.what() << END_STYLE << std::endl;
+	}
+
+	std::cout << std::endl;
+	help_msg("Testing PresidentialPardonForm copy constructors");
+	*p1 = p2;
+	warning_msg("Copied PresidentialPardonForm  can't change is _target, because it's a const std::string");
+	std::cout << *p1 << std::endl;
+	PresidentialPardonForm	p4(p2);
+	std::cout << p4 << std::endl;
+
+	std::cout << std::endl;
+	try {
+		help_msg("Trying to execute PresidentialPardonForm with target garden without the required grade");
+		p3.execute(b3);
+	}
+	catch (std::exception &e) {
+		std::cerr << RED << e.what() << END_STYLE << std::endl;
+	}
+	
+	std::cout << std::endl;
+	try {
+		help_msg("Trying to execute PresidentialPardonForm with target kitchen which is not signed");
+		p5.execute(*b1);
+	}
+	catch (std::exception &e) {
+		std::cerr << RED << e.what() << END_STYLE << std::endl;
+	}
+
+	std::cout << std::endl;
+	try {
+		help_msg("Executing PresidentialPardonForm with target garden with the required grade");
+		p3.execute(*b1);
+	}
+	catch (std::exception &e) {
+		std::cerr << RED << e.what() << END_STYLE << std::endl;
+	}
+	
+	std::cout << std::endl;
+	try {
+		help_msg("Bureaucrat with grade too low tries to execute PresidentialPardonForm with target home");
+		b3.executeForm(p2);
+	}
+	catch (std::exception &e) {
+		std::cerr << RED << e.what() << END_STYLE << std::endl;
+	}
+	
+	std::cout << std::endl;
+	try {
+		help_msg("Bureaucrat with grade 0k tries to execute PresidentialPardonForm with target kitchen which is not signed");
+		b2.executeForm(p5);
+	}
+	catch (std::exception &e) {
+		std::cerr << RED << e.what() << END_STYLE << std::endl;
+	}
+	
+	std::cout << std::endl;
+	try {
+		help_msg("Bureaucrat with grade 0k execute PresidentialPardonForm with target home which is signed");
+		b2.executeForm(p2);
+	}
+	catch (std::exception &e) {
+		std::cerr << RED << e.what() << END_STYLE << std::endl;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
 	std::cout << std::endl;
 	help_msg("Destructors");
 	delete (b1);
 	delete (s1);
+	delete (r1);
+	delete (p1);
 	return (0);
 }
